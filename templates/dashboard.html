@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Transaction Dashboard</h2>
+<a href="/add" class="btn btn-success mb-3">+ Add Transaction</a>
+<table class="table table-bordered table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>Date</th><th>Type</th><th>Category</th><th>Amount</th><th>Partner</th><th>Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in transactions %}
+    <tr>
+      <td>{{ t.date.strftime('%Y-%m-%d') }}</td>
+      <td>{{ t.type }}</td>
+      <td>{{ t.category }}</td>
+      <td>{{ '{:.2f}'.format(t.amount) }}</td>
+      <td>{{ t.partner }}</td>
+      <td>{{ t.note }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

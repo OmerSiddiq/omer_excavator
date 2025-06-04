@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Monthly Report</h2>
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr><th>Month</th><th>Income</th><th>Expense</th><th>Profit</th>
+    {% for p in total_shares.keys() %}
+      <th>{{ p }}'s Share</th>
+    {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for month, data in summary.items() %}
+    <tr>
+      <td>{{ month }}</td>
+      <td>{{ data['Income'] }}</td>
+      <td>{{ data['Expense'] }}</td>
+      <td>{{ data['Profit'] }}</td>
+      {% for p in total_shares.keys() %}
+        <td>{{ data['Shares'][p] }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+    <tr class="table-secondary fw-bold">
+      <td>Total</td>
+      <td colspan="2"></td>
+      <td>{{ total_profit }}</td>
+      {% for p, s in total_shares.items() %}
+        <td>{{ s }}</td>
+      {% endfor %}
+    </tr>
+  </tbody>
+</table>
+{% endblock %}
