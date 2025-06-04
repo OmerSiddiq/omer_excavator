@@ -16,6 +16,7 @@ class Transaction(db.Model):
     amount = db.Column(db.Float, nullable=False)
     note = db.Column(db.String(200))
     partner = db.Column(db.String(20), nullable=False, default='All')
+    excavator = db.Column(db.String(20), nullable=False)  # 'PC400' or 'PC200'
 
 # Partner Contributions
 partner_contributions = {
@@ -62,12 +63,13 @@ def add_transaction():
             category=request.form['category'],
             amount=float(request.form['amount']),
             note=request.form.get('note'),
-            partner=request.form['partner']
+            partner=request.form['partner'],
+            excavator=request.form['excavator']
         )
         db.session.add(transaction)
         db.session.commit()
         return redirect(url_for('dashboard'))
-    return render_template('add.html', partners=list(partner_contributions.keys()) + ['All'])
+    return render_template('add.html', partners=list(partner_contributions.keys()) + ['All'], excavators=['PC400', 'PC200'])
 
 @app.route('/report')
 def report():
