@@ -10,14 +10,29 @@
   </thead>
   <tbody>
     {% for t in transactions %}
-    <tr>
-      <td>{{ t.date.strftime('%Y-%m-%d') }}</td>
-      <td>{{ t.type }}</td>
-      <td>{{ t.category }}</td>
-      <td>{{ '{:.2f}'.format(t.amount) }}</td>
-      <td>{{ t.partner }}</td>
-      <td>{{ t.note }}</td>
-    </tr>
+ <table>
+  <tr>
+    <th>Date</th>
+    <th>Type</th>
+    <th>Category</th>
+    <th>Amount</th>
+    <th>Note</th>
+    <th>Partner</th>
+    <th>Excavator</th>
+  </tr>
+  {% for t in transactions %}
+  <tr>
+    <td>{{ t.date }}</td>
+    <td>{{ t.type }}</td>
+    <td>{{ t.category }}</td>
+    <td>{{ t.amount }}</td>
+    <td>{{ t.note }}</td>
+    <td>{{ t.partner }}</td>
+    <td>{{ t.excavator }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
     {% endfor %}
   </tbody>
 </table>
